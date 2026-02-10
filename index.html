@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brute Force Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>🔐 Password Strength Audit</h2>
+        <p>Test your password against a modern cracking rig.</p>
+        
+        <input type="text" id="passwordInput" placeholder="Type a password..." autocomplete="off">
+        
+        <div class="strength-meter">
+            <div id="strengthBar"></div>
+        </div>
+        
+        <p id="feedback">Waiting for input...</p>
+        <p id="crackTime">Time to crack: <span id="timeText">---</span></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

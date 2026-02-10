@@ -1,0 +1,52 @@
+body {
+    background-color: #0d0d0d;
+    color: #00ff41; /* Hacker Green */
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: #1a1a1a;
+    padding: 2rem;
+    border: 1px solid #00ff41;
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+    width: 400px;
+    text-align: center;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 20px 0;
+    background: #000;
+    border: 1px solid #333;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1.2rem;
+}
+
+.strength-meter {
+    height: 10px;
+    background: #333;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#strengthBar {
+    height: 100%;
+    width: 0%;
+    background: red;
+    transition: width 0.3s, background 0.3s;
+}
+
+#crackTime {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 15px;
+}
