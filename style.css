@@ -1,52 +1,176 @@
+:root {
+    --theme-color: #00ff41; /* Default Green */
+    --bg-color: #050510;
+    --glass: rgba(10, 15, 20, 0.75);
+}
+
+* { box-sizing: border-box; }
+
 body {
-    background-color: #0d0d0d;
-    color: #00ff41; /* Hacker Green */
-    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    height: 100vh;
+    background-color: var(--bg-color);
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--theme-color);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-.container {
-    background: #1a1a1a;
-    padding: 2rem;
-    border: 1px solid #00ff41;
-    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
-    width: 400px;
-    text-align: center;
-}
-
-input {
-    width: 90%;
-    padding: 10px;
-    margin: 20px 0;
-    background: #000;
-    border: 1px solid #333;
-    color: #fff;
-    font-family: inherit;
-    font-size: 1.2rem;
-}
-
-.strength-meter {
-    height: 10px;
-    background: #333;
-    width: 100%;
-    margin-bottom: 20px;
-    border-radius: 5px;
     overflow: hidden;
+    transition: color 0.5s ease;
 }
 
-#strengthBar {
-    height: 100%;
-    width: 0%;
-    background: red;
-    transition: width 0.3s, background 0.3s;
+/* --- 1. GHOST MATRIX RAIN --- */
+#hacker-rain {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -4; /* Furthest back */
+    opacity: 0.15; /* VERY LOW OPACITY as requested */
 }
 
-#crackTime {
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-top: 15px;
+/* --- 2. THE MOVING 3D GRID --- */
+.retro-grid {
+    position: absolute;
+    width: 200vw;
+    height: 200vh;
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.9) 0%, transparent 100%),
+        linear-gradient(0deg, transparent 24%, var(--theme-color) 25%, var(--theme-color) 26%, transparent 27%, transparent 74%, var(--theme-color) 75%, var(--theme-color) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, var(--theme-color) 25%, var(--theme-color) 26%, transparent 27%, transparent 74%, var(--theme-color) 75%, var(--theme-color) 76%, transparent 77%, transparent);
+    background-size: 50px 50px;
+    transform: perspective(300px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+    animation: grid-scroll 3s linear infinite;
+    opacity: 0.2; /* Subtle grid */
+    z-index: -3;
+    transition: opacity 0.5s;
 }
+
+@keyframes grid-scroll {
+    0% { transform: perspective(300px) rotateX(60deg) translateY(0) translateZ(-200px); }
+    100% { transform: perspective(300px) rotateX(60deg) translateY(50px) translateZ(-200px); }
+}
+
+/* --- 3. CRT EFFECTS --- */
+.scanlines {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.3));
+    background-size: 100% 4px;
+    z-index: 10; pointer-events: none; opacity: 0.6;
+}
+
+.vignette {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 40%, #000 150%);
+    z-index: 5; pointer-events: none;
+}
+
+/* --- 4. UI CONTAINER --- */
+.container {
+    width: 480px;
+    padding: 2rem;
+    background: var(--glass);
+    border: 1px solid var(--theme-color);
+    box-shadow: 0 0 40px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    position: relative;
+    transition: border-color 0.5s, box-shadow 0.5s;
+    z-index: 2; /* Sits above rain and grid */
+}
+
+/* Holo Badge */
+.holo-badge {
+    position: absolute; top: -15px; right: 20px;
+    background: #000;
+    border: 1px solid var(--theme-color);
+    color: var(--theme-color);
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    box-shadow: 0 0 10px var(--theme-color);
+    transform: skewX(-15deg);
+    transition: 0.5s;
+}
+
+/* Header */
+.header { text-align: center; margin-bottom: 30px; }
+.glitch-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem; margin: 0;
+    text-shadow: 3px 3px 0px rgba(0,0,0,0.5);
+    letter-spacing: 5px;
+}
+.subtitle { font-size: 0.7rem; opacity: 0.7; letter-spacing: 4px; margin-top: 5px; }
+
+/* Inputs */
+.input-zone { position: relative; margin-bottom: 20px; }
+input {
+    width: 100%; padding: 15px;
+    background: rgba(0,0,0,0.4);
+    border: none; border-bottom: 2px solid #333;
+    color: #fff; font-size: 1.2rem; font-family: inherit;
+    outline: none; transition: 0.3s;
+}
+input:focus { border-bottom: 2px solid var(--theme-color); background: rgba(255,255,255,0.05); }
+
+#togglePassword {
+    position: absolute; right: 15px; top: 18px;
+    color: #666; cursor: pointer; transition: 0.3s;
+}
+#togglePassword:hover { color: var(--theme-color); }
+
+/* Buttons */
+.controls { display: flex; gap: 10px; margin-bottom: 25px; }
+.cyber-btn {
+    flex: 1; padding: 12px;
+    background: transparent;
+    border: 1px solid var(--theme-color);
+    color: var(--theme-color);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem; cursor: pointer;
+    transition: 0.3s; text-transform: uppercase;
+    position: relative; overflow: hidden;
+}
+.cyber-btn:hover {
+    background: var(--theme-color);
+    color: #000;
+    box-shadow: 0 0 25px var(--theme-color);
+}
+
+/* Power Cells */
+.power-cell-container {
+    display: flex; gap: 5px; height: 12px; margin-bottom: 25px;
+}
+.power-cell {
+    flex: 1;
+    background: #222;
+    border: 1px solid #333;
+    transform: skewX(-20deg);
+    transition: 0.3s;
+}
+.power-cell.active {
+    background: var(--theme-color);
+    box-shadow: 0 0 10px var(--theme-color);
+    border-color: transparent;
+}
+
+/* Info Grid */
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+.info-card {
+    background: rgba(0,0,0,0.3);
+    border-left: 3px solid var(--theme-color);
+    padding: 10px;
+    display: flex; flex-direction: column;
+}
+.label { font-size: 0.6rem; color: #888; margin-bottom: 5px; }
+.value { font-size: 1.1rem; font-weight: bold; }
+
+.console-output {
+    font-size: 0.9rem;
+    color: var(--theme-color);
+    border-top: 1px dashed #444;
+    padding-top: 10px;
+    opacity: 0.8;
+}
+.blink { animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: 0; } }
