@@ -3,22 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brute Force Calculator</title>
+    <title>CYBER//DECK ULTIMATE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <canvas id="hacker-rain"></canvas>
+
+    <div class="retro-grid"></div>
+    
+    <div class="vignette"></div>
+    <div class="scanlines"></div>
+
     <div class="container">
-        <h2>🔐 Password Strength Audit</h2>
-        <p>Test your password against a modern cracking rig.</p>
-        
-        <input type="text" id="passwordInput" placeholder="Type a password..." autocomplete="off">
-        
-        <div class="strength-meter">
-            <div id="strengthBar"></div>
+        <div class="holo-badge">SECURE_LEVEL_<span id="levelText">0</span></div>
+
+        <div class="header">
+            <h1 class="glitch-title" data-text="CYBER_DECK">CYBER_DECK</h1>
+            <p class="subtitle">ADVERSARIAL THREAT SIMULATOR</p>
         </div>
-        
-        <p id="feedback">Waiting for input...</p>
-        <p id="crackTime">Time to crack: <span id="timeText">---</span></p>
+
+        <div class="input-zone">
+            <input type="password" id="passwordInput" placeholder="ENTER_CREDENTIALS..." autocomplete="off">
+            <div class="focus-border"></div>
+            <i class="fa-solid fa-eye" id="togglePassword"></i>
+        </div>
+
+        <div class="controls">
+            <button id="genBtn" class="cyber-btn">
+                <i class="fa-solid fa-microchip"></i> AUTO_GEN
+            </button>
+            <button id="copyBtn" class="cyber-btn">
+                <i class="fa-solid fa-fingerprint"></i> EXTRACT
+            </button>
+        </div>
+
+        <div class="power-cell-container">
+            <div class="power-cell"></div><div class="power-cell"></div>
+            <div class="power-cell"></div><div class="power-cell"></div>
+            <div class="power-cell"></div><div class="power-cell"></div>
+            <div class="power-cell"></div><div class="power-cell"></div>
+            <div class="power-cell"></div><div class="power-cell"></div>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <span class="label">EST. CRACK TIME</span>
+                <span class="value" id="timeText">---</span>
+            </div>
+            <div class="info-card">
+                <span class="label">ATTACK VECTOR</span>
+                <span class="value vector" id="toolText">WAITING...</span>
+            </div>
+        </div>
+
+        <div class="console-output" id="feedback">
+            <span class="blink">></span> SYSTEM_READY...
+        </div>
     </div>
 
     <script src="script.js"></script>
