@@ -1,4 +1,3 @@
-alert("I am working!");
 const passwordInput = document.getElementById('passwordInput');
 const strengthBar = document.getElementById('strengthBar');
 const feedback = document.getElementById('feedback');
@@ -41,4 +40,5 @@ function updateUI(score) {
         feedback.innerText = "Strong";
         timeText.innerText = "400 Years";
     }
+
 }
